@@ -20,8 +20,9 @@ const (
     PLUS = "+"
     MINUS = "-"
     BANG = "!"
-    ASTERISK = "*"
+    ASTERISK = "*" 
     SLASH = "/" 
+    DOUBLE_ASTERISK = "**"
 
     LT = "<"
     GT = ">"
