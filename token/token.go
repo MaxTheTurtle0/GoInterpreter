@@ -26,6 +26,8 @@ const (
 
     LT = "<"
     GT = ">"
+    LT_EQ = "<=" 
+    GT_EQ = ">="
     EQ = "=="
     NOT_EQ = "!="
 
