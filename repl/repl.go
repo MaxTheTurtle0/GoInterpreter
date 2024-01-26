@@ -31,7 +31,7 @@ func Start(in io.Reader, out io.Writer) {
         p := parser.New(l)
         program := p.ParseProgram()
         if len(p.Errors()) != 0 {
-            printParserErrors(out, p.Errors()) 
+            p.PrintParserErrors(out) 
         }
        
         evaluated := evaluator.Eval(program)
@@ -39,14 +39,5 @@ func Start(in io.Reader, out io.Writer) {
             io.WriteString(out, evaluated.Inspect())
             io.WriteString(out, "\n")
         }
-    }
-}
-
-func printParserErrors(out io.Writer, errors []string) {
-    io.WriteString(out, "Woops! We ran into some error here!\n")
-    io.WriteString(out, " parser errors:\n")
-    
-    for _, msg := range errors {
-        io.WriteString(out, "\t"+msg+"\n")
     }
 }

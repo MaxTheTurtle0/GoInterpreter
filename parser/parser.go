@@ -5,6 +5,7 @@ import (
 	"go/interpreter/ast"
 	"go/interpreter/lexer"
 	"go/interpreter/token"
+	"io"
 	"strconv"
 )
 
@@ -13,6 +14,7 @@ const (
     LOWEST
     EQUALS // ==
     LESSGREATER // > or <
+    LESSGREATEREQUALS // >= or <= 
     SUM // +
     PRODUCT // *
     POWER // **
@@ -25,6 +27,8 @@ var precedences = map[token.TokenType]int {
     token.NOT_EQ: EQUALS,
     token.LT: LESSGREATER,
     token.GT: LESSGREATER,
+    token.LT_EQ: LESSGREATEREQUALS,
+    token.GT_EQ: LESSGREATEREQUALS,
     token.PLUS: SUM,
     token.MINUS: SUM,
     token.SLASH: PRODUCT,
@@ -77,6 +81,8 @@ func New(l *lexer.Lexer) *Parser {
     p.registerInfix(token.NOT_EQ, p.parseInfixExpression)
     p.registerInfix(token.LT, p.parseInfixExpression)
     p.registerInfix(token.GT, p.parseInfixExpression)
+    p.registerInfix(token.LT_EQ, p.parseInfixExpression) 
+    p.registerInfix(token.GT_EQ, p.parseInfixExpression)
     p.registerInfix(token.LPAREN, p.parseCallExpression)
 
     return p 
@@ -92,6 +98,16 @@ func (p *Parser) registerInfix(tokenType token.TokenType, fn infixParseFn) {
 
 func (p *Parser) Errors() []string {
     return p.errors
+}
+
+
+func (p *Parser) PrintParserErrors(out io.Writer) {
+    io.WriteString(out, "Woops! We ran into some error here!\n")
+    io.WriteString(out, " parser errors:\n")
+    
+    for _, msg := range p.errors {
+        io.WriteString(out, "\t"+msg+"\n")
+    }
 }
 
 func (p *Parser) peekError(t token.TokenType) {
