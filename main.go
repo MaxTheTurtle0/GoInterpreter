@@ -24,8 +24,8 @@ func main() {
         filePath := os.Args[1]
         
         // check for right file extension
-        if filePath[len(filePath)-7:] != ".monkey" {
-            fmt.Printf("Please provide a file with the .monkey extension\n")
+        if filePath[len(filePath)-7:] != ".turtls" {
+            fmt.Printf("Please provide a file with the .turtls extension\n")
             os.Exit(0)
         }
 
@@ -77,7 +77,7 @@ func main() {
         panic(err)
     }
 
-    fmt.Printf("Hello %s! This is a C-like language!\n", user.Username)
-    fmt.Printf("Feel free to type in commands\n")
+    fmt.Printf("Hello %s! Welcome to TurtlScript!\n", user.Username)
+    fmt.Printf("Type .quit to quit.\n")
     repl.Start(os.Stdin, os.Stdout)
 }

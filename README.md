@@ -10,7 +10,7 @@ For example:
 - Float datatype
 - support "-" in variable names
 - Quit REPL by using ".quit"
-- Using the interpreter to read files with a .monkey extension
+- Using the interpreter to read files with a .turtls extension
 
 Now let's get into the syntax and features of the language:
 
