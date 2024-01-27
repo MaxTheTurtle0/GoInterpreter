@@ -3,7 +3,7 @@
 This is an Interpreter written in Golang, mostly following the book ["Writing an Interpreter in Go" by Thorsten Ball](https://interpreterbook.com/). However, there are quite a few differences by now.
 
 For example:
-- ** operator
+- ** and % operators
 - bitwise operators
 - && and || operators
 - \>= and <= operators
@@ -27,30 +27,31 @@ TurtlScript is a dynamically typed language featuring a C-like syntax.
 
 ### Operators
 #### Arithmetic
-Addition: x + y
-Subtraction: x - y
-Multiplication: x * y
-Division: x / y
-Exponentiation: x ** y
+Addition: x + y\
+Subtraction: x - y\
+Multiplication: x * y\
+Division: x / y\
+Modulus: x % y\
+Exponentiation: x ** y\
 
 #### Comparison
-Equal to: x == y
-Not Equal: x != y
-Greater than: x > y
-Less than: x < y
-Greater than or equal to: x \>= y
-Less than or equal to: x \<= y
+Equal to: x == y\
+Not Equal: x != y\
+Greater than: x > y\
+Less than: x < y\
+Greater than or equal to: x \>= y\
+Less than or equal to: x \<= y\
 
 #### Logical
-Logical and: x < 5 && x < 10
-Logical or: x < 5 || x < 4
+Logical and: x < 5 && x < 10\
+Logical or: x < 5 || x < 4\
 Logical not: !(x < 5 && x < 10)
 
 #### Bitwise
-AND: x & y
-OR: x | y
-XOR: x ^ y
-Zero fill left shift: x << y
+AND: x & y\
+OR: x | y\
+XOR: x ^ y\
+Zero fill left shift: x << y\
 Signed right shift: x \>> y
 
 #### Assignment
@@ -71,7 +72,7 @@ let allowed = age >= 18;
 
 Here, the messages are both of type String, while age is of type Integer (int64 under the hood). Adding a ".0" at the end of the 16 would result in age being of type Float (float64). As you can see Variables are declared using the `let` keyword and that every statement has to end with a semicolon.
 
-### Conditionals and Function Calls
+#### Conditionals and Function Calls
 
 ```TurtlScript
 if allowed {
