@@ -20,6 +20,7 @@ const (
     PLUS = "+"
     MINUS = "-"
     BANG = "!"
+    MODULO = "%" 
     ASTERISK = "*" 
     SLASH = "/" 
     DOUBLE_ASTERISK = "**"

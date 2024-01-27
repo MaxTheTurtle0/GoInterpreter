@@ -364,6 +364,14 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
             "a + b << c",
             "((a + b) << c)",
         },
+        {
+            "a + b % c",
+            "(a + (b % c))",
+        },
+        {
+            "a * b % c",
+            "((a * b) % c)",
+        },
 	}
 
 	for _, tt := range tests {

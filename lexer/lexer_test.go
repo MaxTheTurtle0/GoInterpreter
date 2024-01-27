@@ -13,7 +13,7 @@ func TestNextToken(t *testing.T) {
         x + y;
     };
     let result = add(five, ten);
-    !-/*5;
+    !-/*5**<<>>%^&|&^;
     5 < 10 > 5;
     if (5 < 10) {
         return true;
@@ -69,6 +69,14 @@ func TestNextToken(t *testing.T) {
         {token.SLASH, "/"},
         {token.ASTERISK, "*"},
         {token.INT, "5"},
+        {token.DOUBLE_ASTERISK, "**"},
+        {token.BITWISE_LEFT_SHIFT, "<<"},
+        {token.BITWISE_RIGHT_SHIFT, ">>"},
+        {token.MODULO, "%"},
+        {token.BITWISE_XOR_NOT, "^"},
+        {token.BITWISE_AND, "&"},
+        {token.BITWISE_OR, "|"},
+        {token.BITWISE_CLEAR, "&^"},
         {token.SEMICOLON, ";"},
         {token.INT, "5"},
         {token.LT, "<"},

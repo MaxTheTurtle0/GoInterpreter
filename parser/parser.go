@@ -17,6 +17,7 @@ const (
     LESSGREATEREQUALS // >= or <= 
     BITWISE // & | ^ &^ << >>
     SUM // +
+    MODULO // % 
     PRODUCT // *
     POWER // **
     PREFIX // -X or !X
@@ -38,6 +39,7 @@ var precedences = map[token.TokenType]int {
     token.BITWISE_RIGHT_SHIFT: BITWISE,
     token.PLUS: SUM,
     token.MINUS: SUM,
+    token.MODULO: MODULO,
     token.SLASH: PRODUCT,
     token.ASTERISK: PRODUCT,
     token.DOUBLE_ASTERISK: POWER,
@@ -82,6 +84,7 @@ func New(l *lexer.Lexer) *Parser {
     p.infixParseFns = make(map[token.TokenType]infixParseFn)
     p.registerInfix(token.PLUS, p.parseInfixExpression)
     p.registerInfix(token.MINUS, p.parseInfixExpression)
+    p.registerInfix(token.MODULO, p.parseInfixExpression)
     p.registerInfix(token.SLASH, p.parseInfixExpression)
     p.registerInfix(token.ASTERISK, p.parseInfixExpression) 
     p.registerInfix(token.DOUBLE_ASTERISK, p.parseInfixExpression)
