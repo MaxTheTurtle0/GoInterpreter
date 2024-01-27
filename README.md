@@ -32,7 +32,7 @@ Subtraction: x - y\
 Multiplication: x * y\
 Division: x / y\
 Modulus: x % y\
-Exponentiation: x ** y\
+Exponentiation: x ** y
 
 #### Comparison
 Equal to: x == y\
@@ -40,7 +40,7 @@ Not Equal: x != y\
 Greater than: x > y\
 Less than: x < y\
 Greater than or equal to: x \>= y\
-Less than or equal to: x \<= y\
+Less than or equal to: x \<= y
 
 #### Logical
 Logical and: x < 5 && x < 10\
