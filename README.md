@@ -72,7 +72,7 @@ let allowed = age >= 18;
 
 Here, the messages are both of type String, while age is of type Integer (int64 under the hood). Adding a ".0" at the end of the 16 would result in age being of type Float (float64). As you can see Variables are declared using the `let` keyword and that every statement has to end with a semicolon.
 
-### Conditionals and Function Calls
+#### Conditionals and Function Calls
 
 ```TurtlScript
 if allowed {
