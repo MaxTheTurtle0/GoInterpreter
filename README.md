@@ -45,14 +45,14 @@ Less than or equal to: x \<= y\
 #### Logical
 Logical and: x < 5 && x < 10\
 Logical or: x < 5 || x < 4\
-Logical not: !(x < 5 && x < 10)\
+Logical not: !(x < 5 && x < 10)
 
 #### Bitwise
 AND: x & y\
 OR: x | y\
 XOR: x ^ y\
 Zero fill left shift: x << y\
-Signed right shift: x \>> y\
+Signed right shift: x \>> y
 
 #### Assignment
 x = 5
