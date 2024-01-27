@@ -24,6 +24,14 @@ const (
     SLASH = "/" 
     DOUBLE_ASTERISK = "**"
 
+    // Bitwise Operators
+    BITWISE_AND = "&"
+    BITWISE_OR = "|"
+    BITWISE_XOR_NOT = "^"
+    BITWISE_CLEAR = "&^"
+    BITWISE_LEFT_SHIFT = "<<"
+    BITWISE_RIGHT_SHIFT = ">>"
+    
     LT = "<"
     GT = ">"
     LT_EQ = "<=" 

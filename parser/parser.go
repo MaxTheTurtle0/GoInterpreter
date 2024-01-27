@@ -18,6 +18,7 @@ const (
     SUM // +
     PRODUCT // *
     POWER // **
+    BITWISE // & | ^ &^ << >>
     PREFIX // -X or !X
     CALL // myFunction(X)
 )
@@ -29,6 +30,12 @@ var precedences = map[token.TokenType]int {
     token.GT: LESSGREATER,
     token.LT_EQ: LESSGREATEREQUALS,
     token.GT_EQ: LESSGREATEREQUALS,
+    token.BITWISE_OR: BITWISE,
+    token.BITWISE_XOR_NOT: BITWISE,
+    token.BITWISE_AND: BITWISE,
+    token.BITWISE_CLEAR: BITWISE,
+    token.BITWISE_LEFT_SHIFT: BITWISE,
+    token.BITWISE_RIGHT_SHIFT: BITWISE,
     token.PLUS: SUM,
     token.MINUS: SUM,
     token.SLASH: PRODUCT,
@@ -70,6 +77,7 @@ func New(l *lexer.Lexer) *Parser {
     p.registerPrefix(token.LPAREN, p.parseGroupedExpression)
     p.registerPrefix(token.IF, p.parseIfExpression)
     p.registerPrefix(token.FUNCTION, p.parseFunctionLiteral)
+    p.registerPrefix(token.BITWISE_XOR_NOT, p.parsePrefixExpression)
 
     p.infixParseFns = make(map[token.TokenType]infixParseFn)
     p.registerInfix(token.PLUS, p.parseInfixExpression)
@@ -83,6 +91,12 @@ func New(l *lexer.Lexer) *Parser {
     p.registerInfix(token.GT, p.parseInfixExpression)
     p.registerInfix(token.LT_EQ, p.parseInfixExpression) 
     p.registerInfix(token.GT_EQ, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_OR, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_XOR_NOT, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_AND, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_CLEAR, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_LEFT_SHIFT, p.parseInfixExpression)
+    p.registerInfix(token.BITWISE_RIGHT_SHIFT, p.parseInfixExpression)
     p.registerInfix(token.LPAREN, p.parseCallExpression)
 
     return p 

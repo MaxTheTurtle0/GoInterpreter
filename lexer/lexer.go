@@ -66,6 +66,10 @@ func (l *Lexer) NextToken() token.Token {
             ch := l.ch
             l.readChar() 
             tok = token.Token{Type: token.LT_EQ, Literal: string(ch) + string(l.ch)}
+        } else if l.peekChar() == '<' {
+            ch := l.ch
+            l.readChar()
+            tok = token.Token{Type: token.BITWISE_LEFT_SHIFT, Literal: string(ch) + string(l.ch)}
         } else {
             tok = newToken(token.LT, l.ch)
         }
@@ -74,6 +78,10 @@ func (l *Lexer) NextToken() token.Token {
             ch := l.ch
             l.readChar() 
             tok = token.Token{Type: token.GT_EQ, Literal: string(ch) + string(l.ch)}
+        } else if l.peekChar() == '>' { 
+            ch := l.ch
+            l.readChar()
+            tok = token.Token{Type: token.BITWISE_RIGHT_SHIFT, Literal: string(ch) + string(l.ch)}
         } else {
             tok = newToken(token.GT, l.ch)
         }
@@ -89,6 +97,18 @@ func (l *Lexer) NextToken() token.Token {
         tok = newToken(token.LBRACE, l.ch)
     case '}':
         tok = newToken(token.RBRACE, l.ch)
+    case '&':
+        if l.peekChar() == '^' {
+            ch := l.ch
+            l.readChar()
+            tok = token.Token{Type: token.BITWISE_CLEAR, Literal: string(ch) + string(l.ch)}
+        } else {
+            tok = newToken(token.BITWISE_AND, l.ch)
+        }
+    case '|':
+        tok = newToken(token.BITWISE_OR, l.ch)
+    case '^':
+        tok = newToken(token.BITWISE_XOR_NOT, l.ch) 
     case 0:
         tok.Literal = ""
         tok.Type = token.EOF

@@ -84,6 +84,16 @@ func evalIntegerInfixExpression(
         return &object.Integer{Value: leftVal * rightVal}
     case "**":
         return &object.Integer{Value: int64(math.Pow(float64(leftVal), float64(rightVal)))}
+    case "&":
+        return &object.Integer{Value: leftVal & rightVal}
+    case "|":
+        return &object.Integer{Value: leftVal | rightVal}
+    case "^":
+        return &object.Integer{Value: leftVal ^ rightVal}
+    case "<<":
+        return &object.Integer{Value: leftVal << uint64(rightVal)}
+    case ">>":
+        return &object.Integer{Value: leftVal >> uint64(rightVal)}
     default:
         return NULL
     }
@@ -95,9 +105,20 @@ func evalPrefixExpression(operator string, right object.Object) object.Object {
         return evalBangOperatorExpression(right)
     case "-": 
         return evalMinusPrefixOperatorExpression(right)
+    case "^": 
+        return evalBitwiseNotPrefixOperatorExpression(right)
     default:
         return NULL
     }
+}
+
+func evalBitwiseNotPrefixOperatorExpression(right object.Object) object.Object {
+    if right.Type() != object.INTEGER_OBJ {
+        return NULL
+    }
+
+    value := right.(*object.Integer).Value
+    return &object.Integer{Value: ^value}
 }
 
 func evalMinusPrefixOperatorExpression(right object.Object) object.Object {
