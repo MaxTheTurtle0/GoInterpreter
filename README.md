@@ -3,7 +3,7 @@
 This is an Interpreter written in Golang, mostly following the book ["Writing an Interpreter in Go" by Thorsten Ball](https://interpreterbook.com/). However, there are quite a few differences by now.
 
 For example:
-- ** operator
+- ** and % operators
 - bitwise operators
 - && and || operators
 - \>= and <= operators
@@ -31,6 +31,7 @@ Addition: x + y
 Subtraction: x - y
 Multiplication: x * y
 Division: x / y
+Modulus: x % y
 Exponentiation: x ** y
 
 #### Comparison
