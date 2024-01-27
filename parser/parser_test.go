@@ -151,6 +151,7 @@ func TestParsingPrefixExpressions(t *testing.T) {
 		{"-foobar;", "-", "foobar"},
 		{"!true;", "!", true},
 		{"!false;", "!", false},
+        {"^2;", "^", 2},
 	}
 
 	for _, tt := range prefixTests {
@@ -198,8 +199,14 @@ func TestParsingInfixExpressions(t *testing.T) {
 		{"5 > 5;", 5, ">", 5},
 		{"5 < 5;", 5, "<", 5},
 		{"5 == 5;", 5, "==", 5},
-		{"5 != 5;", 5, "!=", 5},
-		{"foobar + barfoo;", "foobar", "+", "barfoo"},
+		{"5 != 5;", 5, "!=", 5},	
+        {"2 ** 5", 2, "**", 5},
+        {"2 ^ 5", 2, "^", 5},
+        {"2 >> 5", 2, ">>", 5},
+        {"2 << 5", 2, "<<", 5},
+        {"2 & 5", 2, "&", 5},
+        {"2 | 5", 2, "|", 5},
+        {"foobar + barfoo;", "foobar", "+", "barfoo"},
 		{"foobar - barfoo;", "foobar", "-", "barfoo"},
 		{"foobar * barfoo;", "foobar", "*", "barfoo"},
 		{"foobar / barfoo;", "foobar", "/", "barfoo"},
@@ -210,7 +217,7 @@ func TestParsingInfixExpressions(t *testing.T) {
 		{"true == true", true, "==", true},
 		{"true != false", true, "!=", false},
 		{"false == false", false, "==", false},
-	}
+    }
 
 	for _, tt := range infixTests {
 		l := lexer.New(tt.input)
@@ -345,6 +352,18 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 			"add(a + b + c * d / f + g)",
 			"add((((a + b) + ((c * d) / f)) + g))",
 		},
+        {
+            "a ** b << c >> d & e | f",
+            "(((((a ** b) << c) >> d) & e) | f)",
+        },
+        {
+            "a + b << c - d >> e * f & g | h",
+            "(((((a + b) << (c - d)) >> (e * f)) & g) | h)",
+        },
+        {
+            "a + b << c",
+            "((a + b) << c)",
+        },
 	}
 
 	for _, tt := range tests {

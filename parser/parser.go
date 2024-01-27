@@ -15,10 +15,10 @@ const (
     EQUALS // ==
     LESSGREATER // > or <
     LESSGREATEREQUALS // >= or <= 
+    BITWISE // & | ^ &^ << >>
     SUM // +
     PRODUCT // *
     POWER // **
-    BITWISE // & | ^ &^ << >>
     PREFIX // -X or !X
     CALL // myFunction(X)
 )
