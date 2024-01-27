@@ -27,32 +27,32 @@ TurtlScript is a dynamically typed language featuring a C-like syntax.
 
 ### Operators
 #### Arithmetic
-Addition: x + y
-Subtraction: x - y
-Multiplication: x * y
-Division: x / y
-Modulus: x % y
-Exponentiation: x ** y
+Addition: x + y\
+Subtraction: x - y\
+Multiplication: x * y\
+Division: x / y\
+Modulus: x % y\
+Exponentiation: x ** y\
 
 #### Comparison
-Equal to: x == y
-Not Equal: x != y
-Greater than: x > y
-Less than: x < y
-Greater than or equal to: x \>= y
-Less than or equal to: x \<= y
+Equal to: x == y\
+Not Equal: x != y\
+Greater than: x > y\
+Less than: x < y\
+Greater than or equal to: x \>= y\
+Less than or equal to: x \<= y\
 
 #### Logical
-Logical and: x < 5 && x < 10
-Logical or: x < 5 || x < 4
-Logical not: !(x < 5 && x < 10)
+Logical and: x < 5 && x < 10\
+Logical or: x < 5 || x < 4\
+Logical not: !(x < 5 && x < 10)\
 
 #### Bitwise
-AND: x & y
-OR: x | y
-XOR: x ^ y
-Zero fill left shift: x << y
-Signed right shift: x \>> y
+AND: x & y\
+OR: x | y\
+XOR: x ^ y\
+Zero fill left shift: x << y\
+Signed right shift: x \>> y\
 
 #### Assignment
 x = 5
