@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"go/interpreter/evaluator"
 	"go/interpreter/lexer"
-	"go/interpreter/repl"
+	"go/interpreter/object"
 	"go/interpreter/parser"
+	"go/interpreter/repl"
 	"os"
 	"os/user"
 )
@@ -53,6 +54,7 @@ func main() {
             return
         }
 
+        env := object.NewEnvironment()
         l := lexer.New(fileContent)
         p := parser.New(l)
 
@@ -62,7 +64,7 @@ func main() {
             p.PrintParserErrors(os.Stdout) 
         }
 
-        evaluator.Eval(program)
+        evaluator.Eval(program, env)
         os.Exit(0)
     }
 
