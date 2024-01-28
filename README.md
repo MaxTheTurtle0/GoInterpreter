@@ -8,7 +8,7 @@ For example:
 - && and || operators
 - \>= and <= operators
 - Float datatype
-- support for comments
+- support for both multiline and single line comments (/* */ and //)
 - support "-" in variable names
 - Quit REPL by using ".quit"
 - Using the interpreter to read files with a .turtls extension
