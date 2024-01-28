@@ -20,7 +20,7 @@ func TestNextToken(t *testing.T) {
     } else {
         return false;
     }
-
+    // this is a comment
     10 == 10;
     10 != 9;
     `

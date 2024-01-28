@@ -7,7 +7,6 @@ import (
 	"go/interpreter/lexer"
 	"go/interpreter/repl"
 	"go/interpreter/parser"
-	"io"
 	"os"
 	"os/user"
 )
@@ -63,13 +62,9 @@ func main() {
             p.PrintParserErrors(os.Stdout) 
         }
 
-        evaluated := evaluator.Eval(program)
-        if evaluated != nil {
-            io.WriteString(os.Stdout, evaluated.Inspect())
-            io.WriteString(os.Stdout, "\n")
-        }
+        evaluator.Eval(program)
         os.Exit(0)
-    }     
+    }
 
     // If the user has not provided any arguments, start the REPL
     user, err := user.Current()

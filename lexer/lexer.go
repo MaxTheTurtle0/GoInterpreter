@@ -52,7 +52,12 @@ func (l *Lexer) NextToken() token.Token {
             tok = newToken(token.BANG, l.ch)
         }
     case '/':
-        tok = newToken(token.SLASH, l.ch)
+        if l.peekChar() == '/' {
+            l.skipComment()
+            return l.NextToken()
+        } else {
+            tok = newToken(token.SLASH, l.ch)
+        }  
     case '*':
         if l.peekChar() == '*' {
             ch := l.ch
@@ -137,6 +142,12 @@ func (l *Lexer) peekChar() byte {
         return 0
     } else {
         return l.input[l.readPosition]
+    }
+}
+
+func (l* Lexer) skipComment() {
+    for l.ch != '\n' && l.ch != 0 {
+        l.readChar()
     }
 }
 
