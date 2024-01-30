@@ -29,14 +29,14 @@ func (l *Lexer) NextToken() token.Token {
     var tok token.Token 
    
     l.skipWhitespace()
-
+    
+    peekChar := l.peekChar()
     switch l.ch {
     case '=':
-        if l.peekChar() == '=' {
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.EQ, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '=':
+            tok = l.newTwoCharToken(token.EQ, l.ch)
+        default:
             tok = newToken(token.ASSIGN, l.ch)
         }
     case '+':
@@ -44,15 +44,14 @@ func (l *Lexer) NextToken() token.Token {
     case '-':
         tok = newToken(token.MINUS, l.ch)
     case '!':
-        if l.peekChar() == '=' {
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.NOT_EQ, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '=':
+            tok = l.newTwoCharToken(token.NOT_EQ, l.ch)
+        default:
             tok = newToken(token.BANG, l.ch)
         }
     case '/':
-        switch l.peekChar() {
+        switch peekChar { 
         case '/':
             l.skipComment()
             return l.NextToken()
@@ -63,35 +62,28 @@ func (l *Lexer) NextToken() token.Token {
             tok = newToken(token.SLASH, l.ch)
         }
     case '*':
-        if l.peekChar() == '*' {
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.DOUBLE_ASTERISK, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '*':
+            tok = l.newTwoCharToken(token.DOUBLE_ASTERISK, l.ch)
+        default:
             tok = newToken(token.ASTERISK, l.ch)
         }
     case '<':
-        if l.peekChar() == '=' {
-            ch := l.ch
-            l.readChar() 
-            tok = token.Token{Type: token.LT_EQ, Literal: string(ch) + string(l.ch)}
-        } else if l.peekChar() == '<' {
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.BITWISE_LEFT_SHIFT, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '=':
+            tok = l.newTwoCharToken(token.LT_EQ, l.ch)
+        case '<':
+            tok = l.newTwoCharToken(token.BITWISE_LEFT_SHIFT, l.ch)
+        default:
             tok = newToken(token.LT, l.ch)
         }
     case '>':
-        if l.peekChar() == '=' {
-            ch := l.ch
-            l.readChar() 
-            tok = token.Token{Type: token.GT_EQ, Literal: string(ch) + string(l.ch)}
-        } else if l.peekChar() == '>' { 
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.BITWISE_RIGHT_SHIFT, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '=':
+            tok = l.newTwoCharToken(token.GT_EQ, l.ch)
+        case '>':
+            tok = l.newTwoCharToken(token.BITWISE_RIGHT_SHIFT, l.ch)
+        default:
             tok = newToken(token.GT, l.ch)
         }
     case ';':
@@ -109,11 +101,10 @@ func (l *Lexer) NextToken() token.Token {
     case '%':
         tok = newToken(token.MODULO, l.ch)
     case '&':
-        if l.peekChar() == '^' {
-            ch := l.ch
-            l.readChar()
-            tok = token.Token{Type: token.BITWISE_CLEAR, Literal: string(ch) + string(l.ch)}
-        } else {
+        switch peekChar {
+        case '^':
+            tok = l.newTwoCharToken(token.BITWISE_CLEAR, l.ch)
+        default:
             tok = newToken(token.BITWISE_AND, l.ch)
         }
     case '|':
@@ -194,6 +185,11 @@ func isLetter(ch byte) bool {
 
 func isDigit(ch byte) bool {
     return '0' <= ch && ch <= '9'
+}
+
+func (l *Lexer) newTwoCharToken(tokenType token.TokenType, ch byte) token.Token {
+    l.readChar() 
+    return token.Token{Type: tokenType, Literal: string(ch) + string(l.ch)}
 }
 
 func newToken(tokenType token.TokenType, ch byte) token.Token {
