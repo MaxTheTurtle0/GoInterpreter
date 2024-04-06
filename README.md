@@ -1,6 +1,6 @@
 # TurtlScript
 
-This is an Interpreter written in Golang, mostly following the book ["Writing an Interpreter in Go" by Thorsten Ball](https://interpreterbook.com/). However, there are quite a few differences by now.
+This is an Interpreter written in Golang, mostly following the book ["Writing an Interpreter in Go" by Thorsten Ball](https://interpreterbook.com/). However, there are quite a few differences by now. The interpreter is not finished yet!
 
 For example:
 - ** and % operators
